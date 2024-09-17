@@ -32,18 +32,26 @@
 
 <script>
 export default {
-  props: ["isSectionTitle", "products", "title", "tag", "category"],
+  data() {
+    return {
+      products: [],
+      layout: "twoColumn",
+    };
+  },
+
+  props: ["isSectionTitle", "title", "tag", "category"],
 
   components: {
     ProductGridItem: () => import("@/components/product/ProductGridItem"),
     QuickView: () => import("@/components/QuickView"),
   },
 
-  computed: {},
-  data() {
-    return {
-      layout: "twoColumn",
-    };
+  async mounted() {
+    const { result: products } = await this.$axios.$get("/products", {
+      params: { category: this.category, tag: this.tag, limit: 4 },
+    });
+
+    this.products = products.filter((a) => a.images.length);
   },
 };
 </script>

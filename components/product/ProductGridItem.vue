@@ -4,10 +4,16 @@
       <n-link :to="`/product/${slugify(product.name)}`">
         <img
           class="default-img"
-          :src="product.image_path"
+          v-if="product.images.length > 1"
+          :src="$store.getters.serverURL + product.images[0].image_path"
           :alt="product.title"
         />
-        <img class="hover-img" :src="product.image_path" :alt="product.name" />
+        <img
+          class="hover-img"
+          v-if="product.images.length >= 2"
+          :src="$store.getters.serverURL + product.images[1].image_path"
+          :alt="product.name"
+        />
       </n-link>
       <div class="product-badges">
         <span class="product-label pink" v-if="product.new">New</span>

@@ -7,7 +7,7 @@
     >
       <div class="bottles">
         <img
-          v-for="product in products[category]"
+          v-for="product in products[category].filter((p) => p.images.length)"
           :src="serverURL + product.images[0].image_path"
           :alt="product.title"
         />

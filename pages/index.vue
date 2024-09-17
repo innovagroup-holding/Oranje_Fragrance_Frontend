@@ -4,16 +4,14 @@
     <HeroSlider />
     <GenderTags />
     <Categories />
-    <ProductWrapper
-      title="Featured Products"
-      :products="featuredProducts"
-      tag="featured"
-    />
+    <ProductWrapper title="Featured Products" tag="featured" />
     <!-- <Banner :banner="featuredProducts[0]" /> -->
+
     <ProductWrapper
       title="Oranje Original Products"
-      :products="oranjeProducts"
-      category="oranje"
+      :category="
+        $store.getters.categoryData.find((type) => type.name === 'oranje')?.id
+      "
     />
     <!-- <Banner :banner="recommendedProducts[0]" /> -->
     <ServicePolicy />
@@ -23,12 +21,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      featuredProducts: [],
-      oranjeProducts: [],
-    };
-  },
   components: {
     TheHeader: () => import("@/components/TheHeader"),
     HeroSlider: () => import("@/components/hero/HeroSlider"),
@@ -41,19 +33,8 @@ export default {
   },
   head() {
     return {
-      title: "Home Fashion One",
+      title: "Home",
     };
   },
-  async mounted() {
-    const { result: featured } = await this.$axios.$get(
-      "/products?tag=featured&limit=4"
-    );
-    this.featuredProducts = featured;
-    const { result: oranje } = await this.$axios.$get(
-      "/products?category=oranje&limit=4"
-    );
-    this.oranjeProducts = oranje;
-  },
-  computed: {},
 };
 </script>
