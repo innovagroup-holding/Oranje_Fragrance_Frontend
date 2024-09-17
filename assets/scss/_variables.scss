@@ -1,11 +1,10 @@
 // Font Family
-$poppins: 'Poppins', sans-serif;
-$abrilfatface: 'Abril Fatface', cursive;
-$cormorantgaramond: 'Cormorant Garamond';
-$greatvibes: 'Great Vibes', cursive;
-$lobster: 'Lobster', cursive;
-$josefin: 'Josefin Sans', sans-serif;
-
+$poppins: "Poppins", sans-serif;
+$abrilfatface: "Abril Fatface", cursive;
+$cormorantgaramond: "Cormorant Garamond";
+$greatvibes: "Great Vibes", cursive;
+$lobster: "Lobster", cursive;
+$josefin: "Josefin Sans", sans-serif;
 
 // text Colors ---------------
 $white: #ffffff;
@@ -26,15 +25,13 @@ $bg-purple: #f0e0ff;
 $heading-color: $black;
 
 // Theme Color
-$theme-color: #a749ff;
+$theme-color: #da292a;
 
-
-
-// Responsive Variables 
-$xx-layout: 'only screen and (min-width: 1366px) and (max-width: 1600px)';
-$xl-layout: 'only screen and (min-width: 1200px) and (max-width: 1365px)';
-$lg-layout: 'only screen and (min-width: 992px) and (max-width: 1199px)';
-$md-layout: 'only screen and (min-width: 768px) and (max-width: 991px)';
-$sm-layout: 'only screen and (min-width: 576px) and (max-width: 767px)';
-$xxs-layout: 'only screen and (min-width: 360px) and (max-width: 479px)';
-$xs-layout: 'only screen and (max-width: 767px)';
+// Responsive Variables
+$xx-layout: "only screen and (min-width: 1366px) and (max-width: 1600px)";
+$xl-layout: "only screen and (min-width: 1200px) and (max-width: 1365px)";
+$lg-layout: "only screen and (min-width: 992px) and (max-width: 1199px)";
+$md-layout: "only screen and (min-width: 768px) and (max-width: 991px)";
+$sm-layout: "only screen and (min-width: 576px) and (max-width: 767px)";
+$xxs-layout: "only screen and (min-width: 360px) and (max-width: 479px)";
+$xs-layout: "only screen and (max-width: 767px)";

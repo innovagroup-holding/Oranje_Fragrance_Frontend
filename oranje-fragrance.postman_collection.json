@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "9eff4604-5dd9-42a6-8501-7c5c2ccb1c6b",
+		"name": "oranje-fragrance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Apis",
+			"item": [
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "get categories",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "nl",
+										"description": "nl , en",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://phplaravel-1239567-4860975.cloudwaysapps.com/api/get_categories",
+									"protocol": "https",
+									"host": [
+										"phplaravel-1239567-4860975",
+										"cloudwaysapps",
+										"com"
+									],
+									"path": [
+										"api",
+										"get_categories"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tag",
+					"item": [
+						{
+							"name": "get tags",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "en",
+										"description": "nl, en",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://phplaravel-1239567-4860975.cloudwaysapps.com/api/get_tags",
+									"protocol": "https",
+									"host": [
+										"phplaravel-1239567-4860975",
+										"cloudwaysapps",
+										"com"
+									],
+									"path": [
+										"api",
+										"get_tags"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "nl",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "first_name",
+											"value": "test",
+											"description": "required|string|max:255",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "test",
+											"description": "required|string|max:255",
+											"type": "text"
+										},
+										{
+											"key": "number",
+											"value": "765999876",
+											"description": "required|string|max:20",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "test354@test.com",
+											"description": "required|string|email|max:255",
+											"type": "text"
+										},
+										{
+											"key": "agreed_privacy_policy",
+											"value": "1",
+											"description": "required|boolean",
+											"type": "text"
+										},
+										{
+											"key": "agreed_terms_of_use",
+											"value": "1",
+											"description": "required|boolean",
+											"type": "text"
+										},
+										{
+											"key": "country",
+											"value": "netherland",
+											"description": "required|string|max:100",
+											"type": "text"
+										},
+										{
+											"key": "street",
+											"value": "streettest",
+											"description": "required|string|max:255",
+											"type": "text"
+										},
+										{
+											"key": "location",
+											"value": "Doesburg",
+											"description": "required|string|max:255",
+											"type": "text"
+										},
+										{
+											"key": "post_code",
+											"value": "123vt",
+											"description": "required|string|max:20",
+											"type": "text"
+										},
+										{
+											"key": "house_number",
+											"value": "12et",
+											"description": "required|string|max:10",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345678",
+											"description": "required|string|min:8",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/signup",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "en",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "test@test.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345678",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/login",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"login"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMjFjZTc1MmY3MWFmMTE1NDI2ZmM0MGI2ZTBmZDRhMWRjYjI5OTRjZjc0ZTI4NTdkNzM5NTI5ODhkZmRiYmU4ZTc0NmY1ZTc5M2NkM2ExMmMiLCJpYXQiOjE3MjYwNDM2MjEuNzk4NzkzLCJuYmYiOjE3MjYwNDM2MjEuNzk4Nzk4LCJleHAiOjE3NTc1Nzk2MjEuMjY4Mzc2LCJzdWIiOiI3Iiwic2NvcGVzIjpbXX0.iFFZPqgp6eOX_voIL0g9wf2Raer1PFNoyJFsHcXOKW7Z3R9nzskV2oIQ89cWKpcUs0Oiu7XU0JNDlYg10fLfy-PoRlWjvHbjL-o11bv5Ae5rKOsV9zkZzRY_x7tp_ivgZzVaGc_cRPky9X4xgLCX2TnPOXUGZPyFfSqrDZhi2KdDyyBlVnF1w1lLIFmsLikCM-jYt1QYZsnr_nixHTAnTPohk-hURlkPeM4DQ5G1nInI-7l83zvRyVOxCnWpkxJHhrOlME-Rs-bxbRVs9YbHZeR7B6vUes_51y3QK5FjTUAifY3Sl3zLAhWOA9Eur-TSmpBvutDmItn0_gEv-wL5ItTTpM7lik_3tzO7E3NPOHTIq5s-NX_7rK9KwONCZaypvF8y51toY3WUtskUbcLrGveNNv76gF50taCphTo0Cs0EEdZTckYMiLjYlgl1NXRFAsgFeR8upVlaUD76zJ5MhsMpM0mHq8z3WFEedplXdKPnSKU6EjwreBHB0tgjLKGe4ESiU3XqNHrmd3V-jhtHKA31syJrGkBXSfyfrYMLOsWUr3r8R4kIqU7Q4ghEOIltk8kBXmyxBtgF_yTwRJIRiu7AfstqzNojcx5hN1Z8bHh17ywwj_PRyASofXukvyIlL-CxKmStkqu0k_QHf-YM1qsZCzYoI7XHefeMkNP69fU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "en",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/logout",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
