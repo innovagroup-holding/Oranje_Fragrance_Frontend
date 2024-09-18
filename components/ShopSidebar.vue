@@ -18,12 +18,15 @@
       <ul class="sidebar-widget-list mt-20">
         <li
           class="sidebar-widget-list-left"
-          v-for="(category, index) in categoryList"
+          v-for="(category, index) in [
+            { name: 'all categories', id: 0 },
+            ...categoryData,
+          ]"
           :key="index"
         >
-          <n-link :to="`?category=${slugify(category)}`">
+          <n-link :to="`?category=${category.id}`">
             <span class="check-mark"></span>
-            {{ category }}
+            {{ category.name }}
           </n-link>
         </li>
       </ul>
@@ -34,9 +37,9 @@
       <h4 class="pro-sidebar-title">Tags</h4>
       <div class="sidebar-widget-tag mt-30">
         <ul>
-          <li v-for="(tag, index) in tagList" :key="index">
-            <n-link :to="`?tag=${slugify(tag)}`">
-              {{ tag }}
+          <li v-for="(tag, index) in tagData" :key="index">
+            <n-link :to="`?tag=${tag.id}`">
+              {{ tag.name }}
             </n-link>
           </li>
         </ul>
@@ -49,8 +52,8 @@
 export default {
   props: ["classes"],
   computed: {
-    categoryList() {
-      return this.$store.getters.categoryList;
+    categoryData() {
+      return this.$store.getters.categoryData;
     },
     sizeList() {
       return this.$store.getters.sizeList;
@@ -58,22 +61,11 @@ export default {
     colorList() {
       return this.$store.getters.colorList;
     },
-    tagList() {
-      return this.$store.getters.tagList;
+    tagData() {
+      return this.$store.getters.tagData;
     },
   },
 
-  methods: {
-    slugify(text) {
-      return text
-        .toString()
-        .toLowerCase()
-        .replace(/\s+/g, "-") // Replace spaces with -
-        .replace(/[^\w-]+/g, "") // Remove all non-word chars
-        .replace(/--+/g, "-") // Replace multiple - with single -
-        .replace(/^-+/, "") // Trim - from start of text
-        .replace(/-+$/, ""); // Trim - from end of text
-    },
-  },
+  methods: {},
 };
 </script>

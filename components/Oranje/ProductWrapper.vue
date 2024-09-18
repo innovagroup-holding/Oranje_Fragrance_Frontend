@@ -1,7 +1,7 @@
 <template>
   <div class="product-area pb-90 pt-80">
     <div class="container">
-      <h2>{{ title }}</h2>
+      <h2 style="font-weight: 600">{{ title }}</h2>
       <div class="tab-content pt-50">
         <div>
           <div class="row">
@@ -51,7 +51,7 @@ export default {
       params: { category: this.category, tag: this.tag, limit: 4 },
     });
 
-    this.products = products.filter((a) => a.images.length);
+    this.products = products;
   },
 };
 </script>

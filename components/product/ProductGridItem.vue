@@ -1,7 +1,7 @@
 <template>
-  <div :to="`/product/${slugify(product.name)}`" class="product-wrap mb-30">
+  <div :to="`/product/${product.id}`" class="product-wrap">
     <div class="product-img">
-      <n-link :to="`/product/${slugify(product.name)}`">
+      <n-link :to="`/product/${product.id}`">
         <img
           class="default-img"
           v-if="product.images.length > 1"
@@ -23,12 +23,17 @@
       </div>
     </div>
     <div class="product-content">
-      <n-link :to="`/product/${slugify(product.name)}`">
+      <n-link :to="`/product/${product.id}`">
         <h3>
           {{ product.name }}
         </h3>
 
-        <p>{{ product.description }}</p>
+        <p>
+          {{
+            product.description ||
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum dicta eum, error voluptas blanditiis impedit natus sunt omnis quae dolorum facere nobis commodi laboriosam vero aliquam pariatur quasi in! Quos?"
+          }}
+        </p>
       </n-link>
       <div class="product-price">
         <span>
@@ -60,24 +65,25 @@
             @click="addToCart(product)"
           >
             <i class="pe-7s-cart"></i>
+
             Add to cart
           </button>
         </div>
       </div>
 
       <div class="product-content__list-view" v-if="layout === 'list'">
-        <p>{{ product.description }}</p>
+        <!-- <p>{{ product.description }}</p> -->
         <div class="pro-action d-flex align-items-center">
           <div class="pro-cart btn-hover">
             <n-link
-              :to="`/product/${slugify(product.name)}`"
+              :to="`/product/${product.id}`"
               class="btn"
               v-if="product.variation"
             >
               select option
             </n-link>
             <button
-              class="btn"
+              class="btn add-to-cart"
               title="Add To Cart"
               @click="addToCart(product)"
               v-else
@@ -89,11 +95,6 @@
           <div class="pro-wishlist">
             <button @click="addToWishlist(product)">
               <i class="fa fa-heart-o"></i>
-            </button>
-          </div>
-          <div class="pro-compare">
-            <button @click="addToCompare(product)">
-              <i class="pe-7s-shuffle"></i>
             </button>
           </div>
         </div>
@@ -158,17 +159,6 @@ export default {
     onClick(product) {
       this.$modal.show("quickview", product);
     },
-
-    slugify(text) {
-      return text
-        .toString()
-        .toLowerCase()
-        .replace(/\s+/g, "-") // Replace spaces with -
-        .replace(/[^\w-]+/g, "") // Remove all non-word chars
-        .replace(/--+/g, "-") // Replace multiple - with single -
-        .replace(/^-+/, "") // Trim - from start of text
-        .replace(/-+$/, ""); // Trim - from end of text
-    },
   },
 };
 </script>
@@ -177,9 +167,22 @@ export default {
 div:has(> .product-wrap):not(.list div) {
   padding-top: 100px;
 }
+
+.add-to-cart {
+  border: 1px solid #d4d4d4 !important;
+  background-color: transparent !important;
+  color: inherit !important;
+  border-radius: 5px !important;
+  width: 100%;
+  font-size: 1em;
+  flex-grow: 1;
+  &::after {
+    content: none !important;
+  }
+}
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
 p {
   display: -webkit-box;
   overflow: hidden;
@@ -189,6 +192,8 @@ p {
 }
 
 h3 {
+  font-weight: bold;
+  margin-bottom: 0.5rem !important;
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
@@ -201,19 +206,82 @@ i.liked {
   -webkit-text-stroke: 1px #e54653;
 }
 
-.add-to-cart {
-  font-size: 1em;
+.product-content {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  a {
+    flex-grow: 1;
+  }
 }
 
 .product-price {
   margin-bottom: 1rem;
+  font-weight: light;
+}
+
+.product-wrap:not(.list .product-wrap) {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+  }
+  .product-img {
+    height: 100px;
+    img {
+      width: 50%;
+      transform: translateY(-40%);
+      max-width: 156px;
+    }
+  }
+}
+
+.list .product-wrap {
+  margin: 1rem 0;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  p {
+    margin: 0;
+  }
+  .product-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    a {
+      position: relative;
+    }
+    img {
+      width: 70%;
+    }
+    img.default-img {
+      margin: 0 15%;
+    }
+    img.hover-img {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+  }
 }
 
 .product-action {
   display: flex;
+  align-items: center;
+  i {
+    font-weight: 600;
+    font-size: 1.2em;
+  }
 }
-.add-to-cart {
-  border: 1px solid #d4d4d4;
-  border-radius: 5px;
+
+.pro-cart {
+  flex-grow: 1;
 }
 </style>

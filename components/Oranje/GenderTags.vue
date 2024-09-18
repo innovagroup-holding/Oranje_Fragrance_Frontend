@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <n-link to="/shop?tag=men" class="men">
+    <n-link :to="`/shop?tag=${menTag?.id}`" class="men">
       <div>
         <span>
           <b v-for="i in 40"> Men </b>
@@ -9,7 +9,7 @@
       </div>
       <img src="/img/Oranje/men.png" alt="perfume for men" />
     </n-link>
-    <n-link to="/shop?tag=women" class="women">
+    <n-link :to="`/shop?tag=${womenTag?.id}`" class="women">
       <div>
         <span>
           <b v-for="i in 30"> Women </b>
@@ -21,7 +21,18 @@
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts">
+export default {
+  computed: {
+    womenTag() {
+      return this.$store.getters.tagData.find((tag) => tag.name === "women");
+    },
+    menTag() {
+      return this.$store.getters.tagData.find((tag) => tag.name === "men");
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 section {

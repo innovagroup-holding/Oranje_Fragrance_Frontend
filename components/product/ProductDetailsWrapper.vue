@@ -17,7 +17,13 @@
                   v-for="(image, index) in product.images"
                   :key="index"
                 >
-                  <img class="img-fluid" :src="image" :alt="product.title" />
+                  <div style="background: white; text-align: center">
+                    <img
+                      class="img-fluid"
+                      :src="$store.getters.serverURL + image.image_path"
+                      :alt="product.title"
+                    />
+                  </div>
                 </div>
                 <div class="quickview-nav swiper-button-prev">
                   <i class="pe-7s-angle-left"></i>
@@ -36,7 +42,11 @@
                   v-for="(image, index) in product.images"
                   :key="index"
                 >
-                  <img class="img-fluid" :src="image" :alt="product.title" />
+                  <img
+                    class="img-fluid"
+                    :src="$store.getters.serverURL + image.image_path"
+                    :alt="product.title"
+                  />
                 </div>
               </swiper>
             </div>
@@ -44,14 +54,14 @@
         </div>
         <div class="col-lg-6 col-md-6">
           <div class="product-details-content ml-70">
-            <h2>{{ product.title }}</h2>
+            <h2>{{ product.name }}</h2>
             <div class="product-details-price">
               <span>${{ discountedPrice(product).toFixed(2) }}</span>
               <span class="old" v-if="product.discount > 0"
                 >${{ product.price.toFixed(2) }}</span
               >
             </div>
-            <div class="pro-details-rating-wrap">
+            <!-- <div class="pro-details-rating-wrap">
               <div class="pro-details-rating" v-if="product.rating == 5">
                 <i class="fa fa-star-o yellow"></i>
                 <i class="fa fa-star-o yellow"></i>
@@ -90,37 +100,9 @@
               <span
                 ><a href="#">{{ product.rating }} Reviews</a></span
               >
-            </div>
+            </div> -->
             <p>{{ product.description }}</p>
-            <div class="pro-details-size-color" v-if="product.variation">
-              <div class="pro-details-color-wrap">
-                <h6 class="label">Color</h6>
-                <div class="pro-details-color-content">
-                  <label
-                    :class="item"
-                    class="radio"
-                    v-for="(item, index) in product.variation.color"
-                    :key="index"
-                  >
-                    <input type="radio" name="colorGroup" />
-                    <span class="check-mark"></span>
-                  </label>
-                </div>
-              </div>
-              <div class="pro-details-size-wrap">
-                <h6 class="label">Size</h6>
-                <div class="pro-details-size-content">
-                  <label
-                    class="radio"
-                    v-for="(item, index) in product.variation.sizes"
-                    :key="index"
-                  >
-                    <input type="radio" name="sizeGroup" />
-                    <span class="check-mark">{{ item }}</span>
-                  </label>
-                </div>
-              </div>
-            </div>
+
             <div class="pro-details-quality">
               <div class="cart-plus-minus">
                 <button @click="decreaseQuantity()" class="dec qtybutton">
@@ -137,7 +119,14 @@
                 </button>
               </div>
               <div class="pro-details-cart btn-hover">
-                <button @click="addToCart(product)">Add To Cart</button>
+                <button class="add-to-cart" @click="addToCart(product)">
+                  Add To Cart
+                </button>
+              </div>
+              <div class="pro-details-cart btn-hover">
+                <button class="add-to-cart" @click="buyNow(product)">
+                  Buy Now
+                </button>
               </div>
               <div class="pro-details-wishlist">
                 <button @click="addToWishlist(product)" title="wishlist">
@@ -149,8 +138,8 @@
               <span class="label">Category:</span>
               <ul>
                 <li>
-                  <n-link :to="`/shop?category=${slugify(product.category)}`">
-                    {{ product.category }}
+                  <n-link :to="`/shop?category=${product.category.id}`">
+                    {{ product.category.name }}
                   </n-link>
                 </li>
               </ul>
@@ -159,9 +148,7 @@
               <span class="label">Tag:</span>
               <ul>
                 <li v-for="(tag, index) in product.tags" :key="index">
-                  <n-link :to="`/shop?tag=${slugify(tag.name)}`">{{
-                    tag
-                  }}</n-link>
+                  <n-link :to="`/shop?tag=${tag.id}`">{{ tag.name }}</n-link>
                 </li>
               </ul>
             </div>
@@ -258,17 +245,28 @@ export default {
       }
       this.$store.dispatch("addToCompare", product);
     },
-
-    slugify(text) {
-      return text
-        .toString()
-        .toLowerCase()
-        .replace(/\s+/g, "-") // Replace spaces with -
-        .replace(/[^\w-]+/g, "") // Remove all non-word chars
-        .replace(/--+/g, "-") // Replace multiple - with single -
-        .replace(/^-+/, "") // Trim - from start of text
-        .replace(/-+$/, ""); // Trim - from end of text
-    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.pro-details-quality {
+  align-items: stretch;
+  gap: 1rem;
+  .pro-details-cart {
+    margin: 0 !important;
+  }
+  button {
+    height: 100%;
+    padding: 0 1rem;
+  }
+}
+
+.qtybutton {
+  text-align: center;
+}
+
+.cart-plus-minus {
+  border-radius: 8px;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div class="product-wrap-2 mb-25">
     <div class="product-img">
-      <n-link :to="`/product/${slugify(product.title)}`">
+      <n-link :to="`/product/${product.id}`">
         <img
           class="default-img"
           :src="product.images[0]"
@@ -27,9 +27,7 @@
     <div class="product-content-2">
       <div class="title-price-wrap-2">
         <h3>
-          <n-link :to="`/product/${slugify(product.title)}`">{{
-            product.title
-          }}</n-link>
+          <n-link :to="`/product/${product.id}`">{{ product.title }}</n-link>
         </h3>
         <div class="price-2">
           <span>${{ discountedPrice(product).toFixed(2) }}</span>
@@ -92,17 +90,6 @@ export default {
 
     onClick(product) {
       this.$modal.show("quickview", product);
-    },
-
-    slugify(text) {
-      return text
-        .toString()
-        .toLowerCase()
-        .replace(/\s+/g, "-") // Replace spaces with -
-        .replace(/[^\w-]+/g, "") // Remove all non-word chars
-        .replace(/--+/g, "-") // Replace multiple - with single -
-        .replace(/^-+/, "") // Trim - from start of text
-        .replace(/-+$/, ""); // Trim - from end of text
     },
   },
 };

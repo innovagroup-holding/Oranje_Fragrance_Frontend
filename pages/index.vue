@@ -4,7 +4,10 @@
     <HeroSlider />
     <GenderTags />
     <Categories />
-    <ProductWrapper title="Featured Products" tag="featured" />
+    <ProductWrapper
+      title="Featured Products"
+      :tag="$store.getters.tagData.find((type) => type.name === 'VIP')?.id"
+    />
     <!-- <Banner :banner="featuredProducts[0]" /> -->
 
     <ProductWrapper

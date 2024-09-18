@@ -1,7 +1,7 @@
 <template>
   <div class="product-wrap-3 mb-20">
     <div class="product-img">
-      <n-link :to="`/product/${slugify(product.title)}`">
+      <n-link :to="`/product/${product.id}`">
         <img
           class="default-img"
           :src="product.images[0]"
@@ -18,7 +18,7 @@
         <div class="product-content-3">
           <div class="product-title">
             <h3>
-              <n-link :to="`/product/${slugify(product.title)}`">{{
+              <n-link :to="`/product/${product.id}`">{{
                 product.title
               }}</n-link>
             </h3>
@@ -95,17 +95,6 @@ export default {
 
     onClick(product) {
       this.$modal.show("quickview", product);
-    },
-
-    slugify(text) {
-      return text
-        .toString()
-        .toLowerCase()
-        .replace(/\s+/g, "-") // Replace spaces with -
-        .replace(/[^\w-]+/g, "") // Remove all non-word chars
-        .replace(/--+/g, "-") // Replace multiple - with single -
-        .replace(/^-+/, "") // Trim - from start of text
-        .replace(/-+$/, ""); // Trim - from end of text
     },
   },
 };

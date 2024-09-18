@@ -1,5 +1,5 @@
 <template>
-  <n-link class="container" :to="`/product/${slugify(banner.title)}`">
+  <n-link class="container" :to="`/product/${banner.id}`">
     <img :src="banner.images[2]" :alt="banner.title" />
   </n-link>
 </template>
@@ -7,18 +7,7 @@
 <script>
 export default {
   props: ["banner"],
-  methods: {
-    slugify(text) {
-      return text
-        .toString()
-        .toLowerCase()
-        .replace(/\s+/g, "-") // Replace spaces with -
-        .replace(/[^\w-]+/g, "") // Remove all non-word chars
-        .replace(/--+/g, "-") // Replace multiple - with single -
-        .replace(/^-+/, "") // Trim - from start of text
-        .replace(/-+$/, ""); // Trim - from end of text
-    },
-  },
+  methods: {},
 };
 </script>
 

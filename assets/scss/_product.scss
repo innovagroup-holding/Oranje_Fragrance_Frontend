@@ -58,20 +58,8 @@
 
 .product-wrap {
   position: relative;
-  // border: 1px solid #d4d4d4;
-  background: #f4f4f4;
   border-radius: 6px;
   .product-img {
-    height: 100px;
-    img {
-      width: 50%;
-      transform: translateY(-50%);
-      max-width: 200px;
-      &:is(.list img) {
-        width: 100%;
-        transform: none;
-      }
-    }
     .product-label {
       position: absolute;
       top: 12px;
@@ -84,7 +72,7 @@
       border-radius: 3px;
       font-weight: 500;
       &.pink {
-        background-color: #fa6bff;
+        background-color: $theme-color;
       }
       &.purple {
         background-color: $theme-color;
@@ -337,12 +325,12 @@
       }
       button {
         color: $white;
-        font-weight: bold;
+        // font-weight: bold;
         text-transform: uppercase;
         background-color: #343538;
         display: inline-block;
         line-height: 1;
-        padding: 23px 38px;
+        // padding: 23px 38px;
         border: none;
         z-index: 99;
         @media #{$xs-layout} {
@@ -623,7 +611,7 @@
       top: 10px;
       right: 20px;
       &.pink {
-        color: #fa6bff;
+        color: $theme-color;
       }
       &.purple {
         color: $theme-color;
@@ -666,7 +654,7 @@
         transition: all 0.4s ease-in-out;
         transform: scaleX(0);
         &:hover {
-          background-color: #fa6bff;
+          background-color: $theme-color;
         }
       }
       &.product-action-2-red {
@@ -702,7 +690,7 @@
           margin-right: 17px;
           position: relative;
           &.old {
-            color: #fa6bff;
+            color: $theme-color;
             text-decoration: line-through;
             &.red {
               color: #ff3d2a;
@@ -735,7 +723,7 @@
           span {
             color: $white;
             &.old {
-              color: #fa6bff;
+              color: $theme-color;
               text-decoration: line-through;
             }
           }
@@ -854,7 +842,7 @@
       font-weight: 500;
       z-index: 9;
       &.pink {
-        background-color: #fa6bff;
+        background-color: $theme-color;
       }
       &.purple {
         background-color: $theme-color;
@@ -932,7 +920,7 @@
           margin: 0 3px;
           transition: all 0.4s ease-in-out;
           &:hover {
-            background-color: #fa6bff;
+            background-color: $theme-color;
           }
         }
       }

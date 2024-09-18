@@ -63,7 +63,7 @@
               >
                 <div
                   class="col-xl-4 col-sm-6"
-                  v-for="(product, index) in getItems"
+                  v-for="(product, index) in products"
                   :key="index"
                 >
                   <ProductGridItem :product="product" :layout="layout" />
@@ -111,21 +111,18 @@ export default {
     return {
       layout: "threeColumn",
       filterItems: [],
-      prevSelectedCategoryName: "",
-      prevSelectedTagName: "",
+      prevSelectedCategoryId: "",
+      prevSelectedTagId: "",
       prevSelectedSizeName: "",
       prevSelectedColorName: "",
       currentPage: 1,
       perPage: 9,
       selectedPrice: "default",
+      products: [],
     };
   },
 
   computed: {
-    products() {
-      return this.$store.getters.getProducts;
-    },
-
     getItems() {
       let start = (this.currentPage - 1) * this.perPage;
       let end = this.currentPage * this.perPage;
@@ -137,74 +134,79 @@ export default {
   },
 
   mounted() {
-    this.updateProductData();
+    // this.updateProductData();
+    this.fetchProducts();
   },
 
   methods: {
+    async fetchProducts() {
+      this.products = await this.$store.dispatch("fetchProducts", {
+        category: this.$route.query.category,
+        tag: this.$route.query.tag,
+      });
+    },
     paginateClickCallback(page) {
       this.currentPage = Number(page);
     },
 
-    updateProductData() {
-      this.paginateClickCallback(1);
+    // updateProductData() {
+    //   this.paginateClickCallback(1);
 
-      const categoryName = this.$route.query.category;
-      const tagName = this.$route.query.tag;
+    //   const categoryId = this.$route.query.category;
+    //   const tagId = this.$route.query.tag;
 
-      if (Object.keys(this.$route.query).length === 0) {
-        this.filterItems = [...this.products];
-      }
+    //   if (Object.keys(this.$route.query).length === 0) {
+    //     this.filterItems = [...this.products];
+    //   }
 
-      if (categoryName && this.prevSelectedCategoryName !== categoryName) {
-        if (
-          Boolean(categoryName) === false ||
-          categoryName === this.slugify("all categories")
-        ) {
-          this.filterItems = [...this.products];
-        } else {
-          const resultData = this.products.filter(
-            (item) => this.slugify(item.category) === categoryName
-          );
-          this.filterItems = [];
-          this.filterItems.push(...resultData);
-        }
-      }
+    //   if (categoryId && this.prevSelectedCategoryId !== categoryId) {
+    //     if (Boolean(categoryId) === false || categoryId === 0) {
+    //       this.filterItems = [...this.products];
+    //     } else {
+    //       const resultData = this.products.filter(
+    //         (item) => item.category.id === categoryId
+    //       );
+    //       this.filterItems = [];
+    //       this.filterItems.push(...resultData);
+    //     }
+    //   }
 
-      if (tagName && this.prevSelectedTagName !== tagName) {
-        if (tagName) {
-          const resultData = this.products.filter(
-            (item) => this.slugify(item.tag) === tagName
-          );
-          this.filterItems = [];
-          this.filterItems.push(...resultData);
-        } else {
-          this.filterItems = [...this.products];
-        }
-      }
+    //   if (tagId && this.prevSelectedTagId !== tagId) {
+    //     if (tagId) {
+    //       const resultData = this.products.filter((item) =>
+    //         item.tags.map((tag) => tag.id).includes(tagId)
+    //       );
+    //       this.filterItems = [];
+    //       this.filterItems.push(...resultData);
+    //     } else {
+    //       this.filterItems = [...this.products];
+    //     }
+    //   }
 
-      this.prevSelectedCategoryName = categoryName;
-      this.prevSelectedTagName = tagName;
-    },
+    //   this.prevSelectedCategoryId = categoryId;
+    //   this.prevSelectedTagId = tagId;
+    // },
 
     discountedPrice(product) {
       return product.price - (product.price * product.discount) / 100;
     },
 
-    slugify(text) {
-      return text
-        .toString()
-        .toLowerCase()
-        .replace(/\s+/g, "-") // Replace spaces with -
-        .replace(/[^\w-]+/g, "") // Remove all non-word chars
-        .replace(/--+/g, "-") // Replace multiple - with single -
-        .replace(/^-+/, "") // Trim - from start of text
-        .replace(/-+$/, ""); // Trim - from end of text
-    },
+    // slugify(text) {
+    //   return text
+    //     .toString()
+    //     .toLowerCase()
+    //     .replace(/\s+/g, "-") // Replace spaces with -
+    //     .replace(/[^\w-]+/g, "") // Remove all non-word chars
+    //     .replace(/--+/g, "-") // Replace multiple - with single -
+    //     .replace(/^-+/, "") // Trim - from start of text
+    //     .replace(/-+$/, ""); // Trim - from end of text
+    // },
   },
 
   watch: {
     $route() {
-      this.updateProductData();
+      // this.updateProductData();
+      this.fetchProducts();
     },
 
     selectedPrice() {

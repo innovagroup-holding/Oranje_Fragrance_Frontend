@@ -3,11 +3,13 @@
     <n-link
       class="category"
       v-for="category in categoryNames"
-      :to="`/shop?category=${slugify(category)}`"
+      :to="`/shop?category=${
+        categoryData.find((cat) => cat.name === category).id
+      }`"
     >
       <div class="bottles">
         <img
-          v-for="product in products[category].filter((p) => p.images.length)"
+          v-for="product in products[category]"
           :src="serverURL + product.images[0].image_path"
           :alt="product.title"
         />
@@ -47,18 +49,7 @@ export default {
       });
     }
   },
-  methods: {
-    slugify(text) {
-      return text
-        .toString()
-        .toLowerCase()
-        .replace(/\s+/g, "-") // Replace spaces with -
-        .replace(/[^\w-]+/g, "") // Remove all non-word chars
-        .replace(/--+/g, "-") // Replace multiple - with single -
-        .replace(/^-+/, "") // Trim - from start of text
-        .replace(/-+$/, ""); // Trim - from end of text
-    },
-  },
+  methods: {},
 };
 </script>
 

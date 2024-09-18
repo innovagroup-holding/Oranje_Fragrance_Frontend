@@ -12,7 +12,7 @@ export const state = () => ({
   wishlist: [],
   compare: [],
   categories: { categories: [], categoryNames: [] },
-  tags: [],
+  tags: { tags: [], tagNames: [] },
 });
 
 // your root getters
@@ -82,8 +82,11 @@ export const getters = {
   categoryList: (state) => {
     return ["all categories", ...state.categories.categoryNames];
   },
+  tagData: (state) => {
+    return state.tags.tags;
+  },
   tagList: (state) => {
-    return state.tags;
+    return state.tags.tagNames;
   },
   sizeList: (state) => {
     return [
@@ -225,14 +228,13 @@ export const actions = {
     const { result: tags } = await this.$axios.$get("/get_tags");
     const tagNames = tags.map((tag) => tag.name);
 
-    commit("SET_TAGS", tagNames);
+    commit("SET_TAGS", { tags, tagNames });
   },
 
   async fetchProducts({ commit }, params) {
     const { result: products } = await this.$axios.$get("/products", {
       params,
     });
-    console.log(params, products.data);
     return products.data;
 
     // products.data.forEach((product) => {
@@ -240,5 +242,12 @@ export const actions = {
     //   product.category = product.category?.name;
     // });
     // commit("SET_PRODUCTS", products.data);
+  },
+  async fetchProduct({ commit }, params) {
+    const { result: product } = await this.$axios.$get("/get_product", {
+      params,
+    });
+
+    return product;
   },
 };
