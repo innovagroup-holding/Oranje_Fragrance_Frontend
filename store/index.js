@@ -235,7 +235,7 @@ export const actions = {
     const { result: products } = await this.$axios.$get("/products", {
       params,
     });
-    return products.data;
+    return products;
 
     // products.data.forEach((product) => {
     //   product.price = parseFloat(product.price);

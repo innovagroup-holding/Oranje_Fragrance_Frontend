@@ -1,6 +1,6 @@
 <template>
-  <n-link class="container" :to="`/product/${banner.id}`">
-    <img :src="banner.images[2]" :alt="banner.title" />
+  <n-link class="container" :to="link" data-aos="fade-up">
+    <img :src="banner.image" :alt="banner.title" />
   </n-link>
 </template>
 
@@ -8,6 +8,17 @@
 export default {
   props: ["banner"],
   methods: {},
+  computed: {
+    link() {
+      const pageName = this.banner.type === "product" ? "product/" : "shop?";
+      const params =
+        this.banner.type === "product"
+          ? this.banner.target
+          : `${this.banner.type}=${this.banner.target}`;
+
+      return pageName + params;
+    },
+  },
 };
 </script>
 

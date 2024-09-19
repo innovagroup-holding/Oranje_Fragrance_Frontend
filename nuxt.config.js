@@ -7,8 +7,8 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: "Flone - VueJS eCommerce Template",
-    titleTemplate: "Flone | %s",
+    title: "Oranje Fragrance",
+    titleTemplate: "Oranje | %s",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -38,7 +38,19 @@ export default {
       src: "~/plugins/notifications-client.js",
       mode: "client",
     },
+    { src: "@/plugins/aos", mode: "client" },
+    { src: "@/plugins/marquee", mode: "client" },
   ],
+  purgeCSS: {
+    whitelist: [
+      "aos-init",
+      "aos-animate",
+      "data-aos-delay",
+      "data-aos-duration",
+      "fade-up",
+      "zoom-in",
+    ],
+  },
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,

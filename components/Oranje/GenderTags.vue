@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <n-link :to="`/shop?tag=${menTag?.id}`" class="men">
+    <n-link :to="`/shop?tag=${menTag?.id}`" class="men" data-aos="fade-right">
       <div>
         <span>
           <b v-for="i in 40"> Men </b>
@@ -9,7 +9,11 @@
       </div>
       <img src="/img/Oranje/men.png" alt="perfume for men" />
     </n-link>
-    <n-link :to="`/shop?tag=${womenTag?.id}`" class="women">
+    <n-link
+      :to="`/shop?tag=${womenTag?.id}`"
+      class="women"
+      data-aos="fade-left"
+    >
       <div>
         <span>
           <b v-for="i in 30"> Women </b>

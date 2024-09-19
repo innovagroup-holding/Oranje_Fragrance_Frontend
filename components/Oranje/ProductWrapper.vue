@@ -1,8 +1,10 @@
 <template>
   <div class="product-area pb-90 pt-80">
     <div class="container">
-      <h2 style="font-weight: 600">{{ title }}</h2>
-      <div class="tab-content pt-50">
+      <h2 data-aos="fade">
+        <span>{{ title }}</span>
+      </h2>
+      <div class="tab-content">
         <div>
           <div class="row">
             <div
@@ -11,7 +13,12 @@
               v-for="(product, index) in products"
               :key="index"
             >
-              <ProductGridItem :product="product" :layout="layout" />
+              <ProductGridItem
+                data-aos="fade-up"
+                :data-aos-delay="200 * index"
+                :product="product"
+                :layout="layout"
+              />
             </div>
           </div>
         </div>
@@ -47,11 +54,57 @@ export default {
   },
 
   async mounted() {
-    const { result: products } = await this.$axios.$get("/products", {
-      params: { category: this.category, tag: this.tag, limit: 4 },
+    const products = await this.$store.dispatch("fetchProducts", {
+      category: this.category,
+      tag: this.tag,
+      limit: 4,
     });
+    console.log(products);
 
-    this.products = products;
+    if (products.length && products.length < 4) {
+      products.push(
+        ...(await this.$store.dispatch("fetchProducts", {
+          category: 6,
+          limit: 3,
+        }))
+      );
+    }
+    this.products = products.slice(0, 4);
   },
 };
 </script>
+
+<style lang="scss">
+.home-page-wrapper h2:not(.vm--modal h2) {
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  color: #acacac;
+  display: flex;
+  justify-content: center;
+  font-size: min(2em, 7vw);
+  span {
+    background: white;
+    padding: 0 20px;
+    z-index: 1;
+    position: relative;
+    line-height: 1.5em;
+    max-width: 80%;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    width: 100%;
+    top: 50%;
+    left: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .home-page-wrapper .tab-content .row {
+    flex-flow: row nowrap;
+    overflow: hidden;
+  }
+}
+</style>

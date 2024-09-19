@@ -80,3 +80,9 @@
 <script>
 export default {};
 </script>
+
+<style>
+.footer-logo img {
+  width: min(100%, 200px);
+}
+</style>

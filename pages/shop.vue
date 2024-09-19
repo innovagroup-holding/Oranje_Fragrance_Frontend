@@ -18,7 +18,7 @@
                     <option value="high2low">Price - High to Low</option>
                   </select>
                 </div>
-                <p>
+                <!-- <p>
                   Showing {{ perPage * currentPage - perPage + 1 }} to
                   {{
                     perPage * currentPage > filterItems.length
@@ -26,7 +26,7 @@
                       : perPage * currentPage
                   }}
                   of {{ filterItems.length }} result
-                </p>
+                </p> -->
               </div>
               <div class="shop-tab">
                 <button
@@ -123,14 +123,14 @@ export default {
   },
 
   computed: {
-    getItems() {
-      let start = (this.currentPage - 1) * this.perPage;
-      let end = this.currentPage * this.perPage;
-      return this.filterItems.slice(start, end);
-    },
-    getPaginateCount() {
-      return Math.ceil(this.filterItems.length / this.perPage);
-    },
+    // getItems() {
+    //   let start = (this.currentPage - 1) * this.perPage;
+    //   let end = this.currentPage * this.perPage;
+    //   return this.filterItems.slice(start, end);
+    // },
+    // getPaginateCount() {
+    //   return Math.ceil(this.filterItems.length / this.perPage);
+    // },
   },
 
   mounted() {
@@ -140,10 +140,12 @@ export default {
 
   methods: {
     async fetchProducts() {
-      this.products = await this.$store.dispatch("fetchProducts", {
-        category: this.$route.query.category,
-        tag: this.$route.query.tag,
-      });
+      this.products = (
+        await this.$store.dispatch("fetchProducts", {
+          category: this.$route.query.category,
+          tag: this.$route.query.tag,
+        })
+      ).data;
     },
     paginateClickCallback(page) {
       this.currentPage = Number(page);
@@ -209,22 +211,22 @@ export default {
       this.fetchProducts();
     },
 
-    selectedPrice() {
-      switch (this.selectedPrice) {
-        case "low2high":
-          this.filterItems = this.filterItems.sort(
-            (a, b) => this.discountedPrice(a) - this.discountedPrice(b)
-          );
-          break;
-        case "high2low":
-          this.filterItems = this.filterItems.sort(
-            (a, b) => this.discountedPrice(b) - this.discountedPrice(a)
-          );
-          break;
-        default:
-          this.filterItems = [...this.products];
-      }
-    },
+    // selectedPrice() {
+    //   switch (this.selectedPrice) {
+    //     case "low2high":
+    //       this.filterItems = this.filterItems.sort(
+    //         (a, b) => this.discountedPrice(a) - this.discountedPrice(b)
+    //       );
+    //       break;
+    //     case "high2low":
+    //       this.filterItems = this.filterItems.sort(
+    //         (a, b) => this.discountedPrice(b) - this.discountedPrice(a)
+    //       );
+    //       break;
+    //     default:
+    //       this.filterItems = [...this.products];
+    //   }
+    // },
   },
 
   head() {

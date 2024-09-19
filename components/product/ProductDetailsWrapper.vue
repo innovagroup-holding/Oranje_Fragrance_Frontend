@@ -17,7 +17,7 @@
                   v-for="(image, index) in product.images"
                   :key="index"
                 >
-                  <div style="background: white; text-align: center">
+                  <div>
                     <img
                       class="img-fluid"
                       :src="$store.getters.serverURL + image.image_path"
@@ -56,7 +56,7 @@
           <div class="product-details-content ml-70">
             <h2>{{ product.name }}</h2>
             <div class="product-details-price">
-              <span>${{ discountedPrice(product).toFixed(2) }}</span>
+              <span>${{ discountedPrice(product).toFixed(2) || 50 }}</span>
               <span class="old" v-if="product.discount > 0"
                 >${{ product.price.toFixed(2) }}</span
               >

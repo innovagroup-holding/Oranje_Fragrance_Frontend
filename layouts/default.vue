@@ -51,3 +51,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.scroll-top i {
+  transform: translateY(-2px);
+}
+
+.swiper-slide > div:not(.container) {
+  background: white;
+  text-align: center;
+}
+</style>

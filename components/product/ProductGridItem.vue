@@ -163,9 +163,10 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 div:has(> .product-wrap):not(.list div) {
   padding-top: 100px;
+  margin: 40px 0;
 }
 
 .add-to-cart {
@@ -174,7 +175,7 @@ div:has(> .product-wrap):not(.list div) {
   color: inherit !important;
   border-radius: 5px !important;
   width: 100%;
-  font-size: 1em;
+  font-size: 0.9em;
   flex-grow: 1;
   &::after {
     content: none !important;
@@ -225,9 +226,7 @@ i.liked {
   display: flex;
   flex-flow: column nowrap;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
   &:hover {
-    transform: scale(1.02);
     box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
   }
   .product-img {
@@ -243,7 +242,6 @@ i.liked {
 .list .product-wrap {
   margin: 1rem 0;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
   p {
     margin: 0;
   }
