@@ -5,11 +5,11 @@
       :class="{ 'is-sticky': isSticky }"
     >
       <div class="container-fluid">
-        <div class="row">
+        <div class="row" style="align-items: center">
           <div class="col-lg-2 col-md-6 col-4">
             <div class="logo">
               <n-link to="/">
-                <img src="/img/logo/logo.png" alt="logo" />
+                <img src="/img/logo/logo.png" alt="logo" height="40" />
               </n-link>
             </div>
           </div>

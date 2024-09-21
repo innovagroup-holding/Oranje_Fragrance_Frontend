@@ -7,7 +7,7 @@
             <div class="col-sm-6">
               <div class="slider-content slider-animation-1">
                 <h3>Smart Products</h3>
-                <h1>Winter Offer <br />2022 Collection</h1>
+                <h1>Winter Offer <br />2024 Collection</h1>
                 <div class="slider-btn btn-hover">
                   <n-link to="/shop">SHOP NOW</n-link>
                 </div>
@@ -27,7 +27,7 @@
             <div class="col-sm-6">
               <div class="slider-content slider-animation-1">
                 <h3>Smart Products</h3>
-                <h1>Summer Offer <br />2022 Collection</h1>
+                <h1>Summer Offer <br />2024 Collection</h1>
                 <div class="slider-btn btn-hover">
                   <n-link to="/shop">SHOP NOW</n-link>
                 </div>
