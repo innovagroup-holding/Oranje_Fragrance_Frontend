@@ -316,7 +316,7 @@
 .header-right-wrap {
   display: flex;
   justify-content: flex-end;
-  margin-top: 32px;
+  align-items: center;
   @media #{$md-layout} {
     margin-top: 0px;
   }

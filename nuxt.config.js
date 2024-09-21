@@ -3,6 +3,10 @@ export default {
     fallback: true,
   },
 
+  server: {
+    port: 3001,
+  },
+
   target: "static", // default is 'server'
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
